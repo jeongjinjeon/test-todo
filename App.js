@@ -4,16 +4,25 @@ import { StyleSheet, Text, View, StatusBar, TextInput, Dimensions, Platform } fr
 const {height, width} = Dimensions.get("window");
 
 export default class App extends React.Component {
+  state = {
+    newToDo: ""
+  };
   render() {
+    const{newToDo} = this.state;
     return (
       <View style={styles.container}>
         <StatusBar barStyle="light-content"/>
         <Text style={styles.title}>순두부의 할일관리</Text>
         <View style={styles.card}>
-          <TextInput style={styles.input} placeholder={"새로운 할일 입력"} />
+          <TextInput style={styles.input} placeholder={"새로운 할일 입력"} value={newToDo} onChangeText={this._crontollNewToDo} placeholderTextColor={"#999"} returnKeyType={"done"} autoCorrect={false}/> 
         </View>
       </View>
     );
+    _crontollNewToDo = text => {
+      this.setState({
+        newToDo: text
+      })
+    }
   }
 }
 
@@ -56,6 +65,6 @@ const styles = StyleSheet.create({
     padding: 20,
     borderBottomColor: "#bbb",
     borderBottomWidth: 1,
-    fonstSize: 25
+    fontSize: 25
   }
 });
